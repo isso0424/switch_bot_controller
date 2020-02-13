@@ -1,13 +1,13 @@
-#README
-##switch bot on python
-###Request Modules
+# README
+## switch bot on python
+### Request Modules
 - gattlib==0.20200122
 - PyBluez==0.23
 - pyserial==3.4
-###How to use
+### How to use
     import switch_bot
     switch_bot.main(time_out_sec, addr, command)
-####arguments
+#### arguments
 - time_out_sec
     - type = int
     - Number of seconds before timeout
