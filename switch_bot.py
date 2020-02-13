@@ -7,6 +7,7 @@ import struct
 import sys
 import time
 
+
 class Driver(object):
     handle = 0x16
     commands = {
@@ -39,9 +40,9 @@ def main(timeout, addr, command):
     print('Connected!')
 
     command_list = {
-        'press' : '\x57\x01\x00',
-        'on'    : '\x57\x01\x01',
-        'off'   : '\x57\x01\x02',
+        'press': '\x57\x01\x00',
+        'on': '\x57\x01\x01',
+        'off': '\x57\x01\x02',
     }
     if command in command_list.keys():
         driver.run_command(command)
@@ -52,4 +53,3 @@ def main(timeout, addr, command):
 
 if __name__ == "__main__":
     main(10, "FC:5B:2F:10:D7:82", "on")
- 
