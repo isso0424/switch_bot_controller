@@ -1,10 +1,5 @@
-import binascii
-import gattlib
 import bluetooth
 from bluetooth.ble import DiscoveryService, GATTRequester
-import argparse
-import struct
-import sys
 import time
 
 
@@ -41,7 +36,7 @@ class Driver(object):
         return self.req.write_by_handle(self.handle, self.commands[command])
 
 
-def main(timeout, addr, command):
+def operate(timeout, addr, command):
     with Driver(device=addr, timeout_secs=timeout) as driver:
         print('Connected!')
         command_list = {
@@ -56,5 +51,23 @@ def main(timeout, addr, command):
         print("completed")
 
 
+def all_on(timeout, addr_list):
+    if not isinstance(addr_list, list):
+        TypeError("addr_list is list of addresses")
+    for addr in addr_list:
+        operate(timeout=timeout, addr=addr, command='on')
+        print("{} is switched on!".format(addr))
+    print("finish!!!")
+
+
+def all_off(timeout, addr_list):
+    if not (isinstance(addr_list, list) or isinstance(addr_list[0], str)):
+        TypeError("addr_list is list of string addresses")
+    for addr in addr_list:
+        operate(timeout=timeout, addr=addr, command='off')
+        print("{} is switched off!".format(addr))
+    print("finished!!!")
+
+
 if __name__ == "__main__":
-    main(10, "FC:5B:2F:10:D7:82", "on")
+    operate(10, "FC:5B:2F:10:D7:82", "on")
